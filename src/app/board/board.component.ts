@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, Renderer2} from '@angular/core';
+import {isUndefined} from "util";
 
 @Component({
   selector: 'app-board',
@@ -6,32 +7,36 @@ import {Component, Input, OnInit, Renderer2} from '@angular/core';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
+
   @Input() title: string;
   listNumber: number[] = [];
   bomb: number [] = [];
+
+
   constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
     for (let i = 1; i <= 100; i++) {
       this.listNumber.push(i);
     }
-    this.bomb = Array.apply(null, Array(30)).map(function(item, index){
+    this.bomb = Array.apply(null, Array(30)).map((item, index) =>{
       return Math.floor(Math.random() * 100);
     });
+    console.log(this.bomb);
   }
-  clickBtn(cell) {
+
+  clickBtn(cell: number) {
     // console.log('Its ' + cell);
     // console.log(cell);
     // console.log(this.bomb);
-    for (let i = 0; i < this.bomb.length; i++) {
-      if (this.bomb[i] === cell) {
-        alert('You Lose');
-        this.renderer.setStyle(event.target, 'background-color', 'red');
-        location.reload();
-      }
-      else {
-        this.renderer.setStyle(event.target, 'background-color', 'blue');
-      }
+
+    let bomb = this.bomb.find((index) => {
+      return (index === cell);
+    });
+    if (isUndefined(bomb)) {
+      this.renderer.setStyle(event.target, 'background-color', 'blue');
+    } else {
+      this.renderer.setStyle(event.target, 'background-color', 'red');
     }
   }
 }
