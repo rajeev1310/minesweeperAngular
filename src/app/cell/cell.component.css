@@ -1,0 +1,15 @@
+div {
+  width: 6%;
+  display: inline-block;
+  margin: 0.5%;
+  vertical-align: middle;
+}
+
+div p {
+  text-align: center;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  vertical-align: middle;
+  margin: 0;
+  display: block;
+}
