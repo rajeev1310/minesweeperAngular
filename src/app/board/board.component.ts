@@ -1,5 +1,7 @@
 import {Component, Input, OnInit, Renderer2} from '@angular/core';
-import {isUndefined} from "util";
+import {isUndefined} from 'util';
+
+import { CellService } from '../cell/cell.service';
 
 @Component({
   selector: 'app-board',
@@ -9,13 +11,20 @@ import {isUndefined} from "util";
 export class BoardComponent implements OnInit {
 
   @Input() title: string;
+  numBombs: number;
+  numRemainBombs: number;
   listNumber: number[] = [];
   bomb: number [] = [];
 
 
-  constructor(private renderer: Renderer2) { }
+
+
+  constructor(private renderer: Renderer2, private CellService: CellService) { }
+
 
   ngOnInit() {
+    this.numBombs = 0;
+    this.numRemainBombs = 30;
     for (let i = 1; i <= 100; i++) {
       this.listNumber.push(i);
     }
@@ -26,10 +35,6 @@ export class BoardComponent implements OnInit {
   }
 
   clickBtn(cell: number) {
-    // console.log('Its ' + cell);
-    // console.log(cell);
-    // console.log(this.bomb);
-
     let bomb = this.bomb.find((index) => {
       return (index === cell);
     });
@@ -37,6 +42,8 @@ export class BoardComponent implements OnInit {
       this.renderer.setStyle(event.target, 'background-color', 'blue');
     } else {
       this.renderer.setStyle(event.target, 'background-color', 'red');
+      this.numBombs++; // Increase the number of bombs
+      this.numRemainBombs--;
     }
   }
 }
