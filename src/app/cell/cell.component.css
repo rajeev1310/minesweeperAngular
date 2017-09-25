@@ -1,15 +1,18 @@
-div {
-  width: 6%;
-  display: inline-block;
-  margin: 0.5%;
-  vertical-align: middle;
+.container {
+  display: inline-table;
+  border: 1px solid #000000;
+  margin: 2px 0;
 }
 
-div p {
+.container:hover {
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.container div p {
   text-align: center;
-  border: 1px solid #000000;
-  border-radius: 10px;
   vertical-align: middle;
   margin: 0;
-  display: block;
+  display: table-cell;
+  height: 40px;
+  width: 40px;
 }

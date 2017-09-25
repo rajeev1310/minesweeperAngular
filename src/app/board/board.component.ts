@@ -28,14 +28,14 @@ export class BoardComponent implements OnInit {
     for (let i = 1; i <= 100; i++) {
       this.listNumber.push(i);
     }
-    this.bomb = Array.apply(null, Array(30)).map((item, index) =>{
+    this.bomb = Array.apply(null, Array(30)).map((item, index) => {
       return Math.floor(Math.random() * 100);
     });
     console.log(this.bomb);
   }
 
   clickBtn(cell: number) {
-    let bomb = this.bomb.find((index) => {
+    const bomb = this.bomb.find((index) => {
       return (index === cell);
     });
     if (isUndefined(bomb)) {
